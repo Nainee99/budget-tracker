@@ -3,7 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import RootProvider from "@/components/providers/RootProvider";
-import { dark, neobrutalism } from "@clerk/themes";
+import { dark} from "@clerk/themes";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -30,7 +30,7 @@ export default function RootLayout({
   return (
     <ClerkProvider
       appearance={{
-        baseTheme: [dark, neobrutalism],
+        baseTheme: dark,
       }}
     >
       <html
