@@ -11,7 +11,7 @@ const Logo = () => {
         height={32}
       />
       <h1 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-500 via-blue-500 to-purple-500">
-        FinFlow
+        Spendo
       </h1>
     </div>
   );

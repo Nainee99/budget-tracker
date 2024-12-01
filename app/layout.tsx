@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
-import { dark } from "@clerk/themes";
+import RootProvider from "@/components/providers/RootProvider";
+import { dark, neobrutalism } from "@clerk/themes";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -21,7 +22,6 @@ export const metadata: Metadata = {
     "Spendo is a modern budget tracker app designed to help you manage your finances effectively with ease and style.",
 };
 
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -30,14 +30,21 @@ export default function RootLayout({
   return (
     <ClerkProvider
       appearance={{
-        baseTheme: dark,
+        baseTheme: [dark, neobrutalism],
       }}
     >
-      <html lang="en" suppressHydrationWarning>
+      <html
+        lang="en"
+        suppressHydrationWarning
+        className="dark"
+        style={{
+          colorScheme: "dark",
+        }}
+      >
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-          {children}
+          <RootProvider>{children}</RootProvider>
         </body>
       </html>
     </ClerkProvider>
