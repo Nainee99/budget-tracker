@@ -53,7 +53,7 @@ async function page() {
       {/* Button Section */}
       <div className="w-full flex justify-center">
         <Button
-          className="w-80 py-3 text-lg font-medium sm:text-xl bg-blue-500 text-white hover:bg-blue-600 transition-all duration-300 transform hover:scale-105"
+          className="w-80 py-3 text-lg font-medium sm:text-xl bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:from-purple-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105"
           asChild
         >
           <Link href={"/"}>I’m done!</Link>
