@@ -1,12 +1,10 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "../ui/button";
 import Logo from "./Logo";
-import { ThemeSwitcherBtn } from "./ThemeSwitcherBtn";
-import { UserButton } from "@clerk/nextjs";
 import {
   Sheet,
   SheetContent,
@@ -14,10 +12,12 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { ThemeSwitcherBtn } from "./ThemeSwitcherBtn";
+import { UserButton } from "@clerk/nextjs";
 
 const Navbar = () => {
   return (
-    <header className="shadow-lg border-b">
+    <header className="shadow-lg border-b bg-background">
       <DesktopNavbar />
       <MobileNavbar />
     </header>
@@ -26,7 +26,7 @@ const Navbar = () => {
 
 export default Navbar;
 
-// navbarItems
+// NavbarItem Component
 const NavbarItem = ({ link, label }: { link: string; label: string }) => {
   const pathname = usePathname();
   const isActive = pathname === link;
@@ -37,7 +37,7 @@ const NavbarItem = ({ link, label }: { link: string; label: string }) => {
         href={link}
         className={cn(
           buttonVariants({ variant: "ghost" }),
-          "text-white text-lg hover:text-gray-600 transition-all duration-200",
+          "text-lg hover:text-gray-600 transition-all duration-200",
           isActive ? "text-blue-600" : "text-foreground"
         )}
       >
@@ -50,13 +50,14 @@ const NavbarItem = ({ link, label }: { link: string; label: string }) => {
   );
 };
 
-// DesktopNavbar
+// Navbar Items
 const items = [
   { label: "Dashboard", link: "/" },
   { label: "Transactions", link: "/transactions" },
   { label: "Manage", link: "/manage" },
 ];
 
+// Desktop Navbar
 const DesktopNavbar = () => {
   return (
     <div className="hidden md:flex justify-between items-center px-4 py-4 container mx-auto">
@@ -72,6 +73,7 @@ const DesktopNavbar = () => {
 
       {/* Right Section */}
       <div className="flex items-center gap-4">
+        {/* Replace with your ThemeSwitcher and UserButton if needed */}
         <ThemeSwitcherBtn />
         <UserButton />
       </div>
@@ -79,32 +81,31 @@ const DesktopNavbar = () => {
   );
 };
 
-// MobileNavbar
+// Mobile Navbar
 const MobileNavbar = () => {
   return (
     <div className="md:hidden">
       <nav className="flex justify-between items-center p-4">
+        {/* Logo */}
         <Logo />
-        <div className="flex items-center gap-4">
-          <ThemeSwitcherBtn />
-          <UserButton />
 
-          {/* Sheet Trigger is now inside the Sheet */}
+        {/* Mobile Menu Trigger */}
+        <div className="flex items-center">
           <Sheet>
             <SheetTrigger asChild>
-              <button className="p-2">
-                <div className="w-6 h-0.5 bg-gray-800 mb-1"></div>
-                <div className="w-6 h-0.5 bg-gray-800 mb-1"></div>
-                <div className="w-6 h-0.5 bg-gray-800"></div>
+              <button className="flex flex-col items-end gap-1">
+                <div className="w-6 h-0.5 bg-white"></div>
+                <div className="w-4 h-0.5 bg-white"></div>
+                <div className="w-6 h-0.5 bg-white"></div>
               </button>
             </SheetTrigger>
 
-            {/* Mobile Sheet for Navbar Items */}
-            <SheetContent className="w-[400px] sm:w-[540px]">
+            {/* Mobile Menu Content */}
+            <SheetContent className="w-[300px] sm:w-[400px]">
               <SheetHeader>
-                <SheetTitle>Menu</SheetTitle>
+                <SheetTitle className="text-center">Menu</SheetTitle>
               </SheetHeader>
-              <div className="flex flex-col gap-4 p-4 items-center justify-center">
+              <div className="flex flex-col gap-6 p-4 items-center">
                 {items.map((item) => (
                   <NavbarItem
                     key={item.label}
